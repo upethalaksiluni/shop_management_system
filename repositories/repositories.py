@@ -1,19 +1,17 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict
-
 from customer.customer import Customer
 from order.order import Order
 from product.product import Product
 
 
 class ProductRepository(ABC):
-
     @abstractmethod
     def add_product(self, product: Product) -> None:
         pass
 
     @abstractmethod
-    def get_by_id(self, product_id) -> Product:
+    def get_by_id(self, product_id: str) -> Product:
         pass
 
     @abstractmethod
@@ -26,13 +24,12 @@ class ProductRepository(ABC):
 
 
 class OrderRepository(ABC):
-
     @abstractmethod
     def add(self, order: Order) -> None:
         pass
 
     @abstractmethod
-    def get_order_by_id(self, order_id) -> Order:
+    def get_order_by_id(self, order_id: str) -> Order:
         pass
 
     @abstractmethod
@@ -41,13 +38,12 @@ class OrderRepository(ABC):
 
 
 class CustomerRepository(ABC):
-
     @abstractmethod
     def add_customer(self, customer: Customer) -> None:
         pass
 
     @abstractmethod
-    def get_by_id(self, customer_id) -> Customer:
+    def get_by_id(self, customer_id: str) -> Customer:
         pass
 
     @abstractmethod
@@ -59,15 +55,15 @@ class CustomerRepository(ABC):
         pass
 
 
+# In-memory implementations
 class InMemoryProductRepository(ProductRepository):
-
     def __init__(self):
         self.__products: Dict[str, Product] = {}
 
     def add_product(self, product: Product) -> None:
         self.__products[product.product_id] = product
 
-    def get_by_id(self, product_id) -> Product:
+    def get_by_id(self, product_id: str) -> Product:
         return self.__products.get(product_id)
 
     def update(self, product: Product) -> None:
@@ -78,14 +74,13 @@ class InMemoryProductRepository(ProductRepository):
 
 
 class InMemoryCustomerRepository(CustomerRepository):
-
     def __init__(self):
         self.__customers: Dict[str, Customer] = {}
 
     def add_customer(self, customer: Customer) -> None:
         self.__customers[customer.customer_id] = customer
 
-    def get_by_id(self, customer_id) -> Customer:
+    def get_by_id(self, customer_id: str) -> Customer:
         return self.__customers.get(customer_id)
 
     def update(self, customer: Customer) -> None:
@@ -96,14 +91,13 @@ class InMemoryCustomerRepository(CustomerRepository):
 
 
 class InMemoryOrderRepository(OrderRepository):
-
     def __init__(self):
         self.__orders: Dict[str, Order] = {}
 
     def add(self, order: Order) -> None:
         self.__orders[order.order_id] = order
 
-    def get_order_by_id(self, order_id) -> Order:
+    def get_order_by_id(self, order_id: str) -> Order:
         return self.__orders.get(order_id)
 
     def list_all_orders(self) -> List[Order]:

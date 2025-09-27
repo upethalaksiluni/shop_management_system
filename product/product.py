@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-
 @dataclass
 class Product:
     product_id: str
@@ -9,7 +8,7 @@ class Product:
     quantity: int
 
     def is_available(self) -> bool:
-        return self.quantity is None
+        return self.quantity > 0
 
     def add_quantity(self, amount: int):
         self.quantity += amount
@@ -19,7 +18,3 @@ class Product:
             self.quantity -= amount
         else:
             raise ValueError("Not enough stock available.")
-
-
-
-

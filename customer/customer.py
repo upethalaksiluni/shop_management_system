@@ -7,4 +7,3 @@ class Customer:
     customer_name: str
     email: str
     contact: str
-

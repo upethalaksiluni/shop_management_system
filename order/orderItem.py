@@ -10,4 +10,3 @@ class OrderItem:
 
     def total_price(self) -> float:
         return self.quantity * self.unit_price
-
